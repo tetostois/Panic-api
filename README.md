@@ -1,66 +1,83 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+API Laravel pour Bruce Wayne
+Ce projet est une API Laravel qui permet à Bruce Wayne de gérer les paniques via une application mobile. L'API est sécurisée avec Laravel Passport et intègre l'API Wayne Enterprises pour envoyer et annuler des paniques.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+-----Fonctionnalités-------
+-Authentification sécurisée : Utilisation de Laravel Passport pour générer des tokens OAuth2.
 
-## About Laravel
+-Gestion des paniques :
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-Envoyer une panique avec des coordonnées GPS et des détails optionnels.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-Annuler une panique.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-Récupérer l'historique des paniques.
 
-## Learning Laravel
+-Intégration avec Wayne Enterprises : Envoi et annulation de paniques via une API externe.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-Journalisation : Toutes les activités de l'API sont enregistrées dans la base de données.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-----Installation------
+Cloner le dépôt :
+bash
+Copy
+git clone https://github.com/votre-utilisateur/panic-api.git
+cd panic-api
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Installer les dépendances :
 
-## Laravel Sponsors
+bash
+Copy
+-composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+----Configurer l'environnement :
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Copiez le fichier .env.example en .env :
 
-## Contributing
+bash
+Copy
+cp .env.example .env
+Configurez les variables d'environnement dans .env :
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+env
+Copy
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=panic_api
+DB_USERNAME=root
+DB_PASSWORD=
 
-## Code of Conduct
+QUEUE_CONNECTION=redis
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+WAYNE_ENTERPRISES_TOKEN=votre_token_ici
+Générer la clé d'application :
 
-## Security Vulnerabilities
+bash
+Copy
+php artisan key:generate
+Configurer Laravel Passport :
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+bash
+Copy
+php artisan passport:install
+Exécuter les migrations et seeders :
 
-## License
+bash
+Copy
+php artisan migrate --seed
+Lancer le serveur :
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+bash
+Copy
+php artisan serve
+Lancer le worker de queue (pour les jobs asynchrones) :
+
+bash
+Copy
+php artisan queue:work
+Utilisation
+Endpoints de l'API
